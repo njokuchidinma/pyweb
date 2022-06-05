@@ -1,0 +1,167 @@
+DATA STRUCTURES ASSIGNMENT 2.(FILES)
+
+# Use words.txt as the file name
+fname = input("Enter file name: ")
+fh = open(fname)
+
+#inp = fh.read()
+
+for text in fh:
+    inp = text.rstrip()
+    print(inp.upper())
+
+
+ASSIGNMENT 7.2
+Q:Write a program that prompts for a file name, then opens that file and reads through the file, looking for lines of the form:
+
+X-DSPAM-Confidence:    0.8475
+
+Count these lines and extract the floating point values from each of the lines and compute the average of those values and produce an output as shown below. Do not use the sum() function or a variable named sum in your solution. 
+
+ANSWER:
+
+# Use the file name mbox-short.txt as the file name
+fname = input("Enter file name: ")
+fh = open(fname)
+count = 0
+decimal_values = []
+
+for line in fh:
+     
+    if not line.startswith("X-DSPAM-Confidence:"):
+        continue
+    else:
+    #CONVERTS STRING TO FLOAT WHILE EXTRACTING FLOATING POINT FROM TEXT
+        numbers = float(line[21: ])
+        #APPENDS NUMBERS TO A LIST(DECIMAL VALUES)
+        decimal_values.append(numbers)
+        #COUNT INCREMENT
+        count = count + 1
+        aggregate = 0
+        
+    for numbers in decimal_values:
+    #ADDING ALL THE NUMBERS IN THE LIST AND ASSIGNING THEM TO VARIABLE 'aggregate'
+        aggregate += numbers
+#CALCULATING AVERAGE        
+average = aggregate/count   
+       
+print("Average spam confidence:", average )
+
+ASSIGNMENT 8.4
+Q: 8.4 Open the file romeo.txt and read it line by line. For each line, split the line into a list of words using the split() method. The program should build a list of words. For each word on each line check to see if the word is already in the list and if not append it to the list. When the program completes, sort and print the resulting words in alphabetical order. 
+
+ANSWER:
+fname = input("Enter file name: ")
+fh = open(fname)
+lst = list()
+
+for line in fh:
+
+    words = line.split()
+    
+    for word in words:
+        if word in lst: 
+           continue
+        else:
+           lst.append(word)
+
+lst.sort()
+        
+print(lst)
+
+ASSIGNMENT 8.5
+Q: 8.5 Open the file mbox-short.txt and read it line by line. When you find a line that starts with 'From ' like the following line:
+
+From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+
+You will parse the From line using split() and print out the second word in the line (i.e. the entire address of the person who sent the message). Then print out a count at the end.
+
+Hint: make sure not to include the lines that start with 'From:'. Also look at the last line of the sample output to see how to print the count.
+
+ANSWER:
+fname = input("Enter file name: ")
+if len(fname) < 1:
+    fname = "mbox-short.txt"
+
+fh = open(fname)
+count = 0
+
+ 
+for line in fh:
+    line = line.rstrip()
+    if not line.startswith("From "):
+        continue
+    else:
+        words = line.split()
+        count = count + 1
+        print(words[1])    
+        
+print("There were", count, "lines in the file with From as the first word")
+
+
+
+
+ASSIGNMWNT 9.4
+9.4 Write a program to read through the mbox-short.txt and figure out who has sent the greatest number of mail messages. The program looks for 'From ' lines and takes the second word of those lines as the person who sent the mail. The program creates a Python dictionary that maps the sender's mail address to a count of the number of times they appear in the file. After the dictionary is produced, the program reads through the dictionary using a maximum loop to find the most prolific committer.
+
+ANSWER:
+name = input("Enter file:")
+if len(name) < 1:
+    name = "mbox-short.txt"
+handle = open(name)
+
+lst = list()
+
+
+
+for line in handle:
+    line = line.rstrip()
+    if not line.startswith("From "):
+        continue
+    else: 
+        emails = line.split()
+        lst.append(emails[1])
+        
+counts = dict()
+for email in lst:
+    counts[email] = counts.get(email,0) + 1
+    
+bigcount = None
+bigemail = None
+for email,count in counts.items():
+    if bigcount is None or count > bigcount:
+        bigcount = count
+        bigemail = email
+        
+print(bigemail,bigcount)
+ 
+ ASSIGNMENT       
+10.2 Write a program to read through the mbox-short.txt and figure out the distribution by hour of the day for each of the messages. You can pull the hour out from the 'From ' line by finding the time and then splitting the string a second time using a colon.
+
+From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+
+Once you have accumulated the counts for each hour, print out the counts, sorted by hour as shown below.
+        
+name = input("Enter file:")
+if len(name) < 1:
+    name = "mbox-short.txt"
+handle = open(name)
+counts = dict()
+
+for line in handle:
+    line = line.rstrip()
+    if not line.startswith("From "):
+        continue
+        
+    else:
+        sentence = line.split()
+        hour = sentence[5]
+        digit = hour.split(":")
+       
+        numbers = digit[0]
+        counts[numbers] = counts.get(numbers,0) + 1
+        
+for key, value in sorted(counts.items()):
+    print (key, value)
+
+        

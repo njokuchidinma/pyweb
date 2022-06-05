@@ -1,0 +1,95 @@
+score = input("Enter Score: ")
+
+scr = float(score)
+
+if scr >= 0.9:
+    print("A")
+elif scr >= 0.8:
+    print("B")
+elif scr >= 0.7:
+    print("C")
+elif scr >= 0.6:
+    print("D")
+elif scr < 0.6:
+    print("F")
+elif scr >= 1.0:
+    print("ERROR")
+    
+    -----------------------
+    
+    oh = 40
+
+hrs = input("Enter Hours:")
+rte = input("Enter Rate:")
+h = float(hrs)
+r = float(rte)
+
+if h > oh:
+
+   pay = oh * r
+   ext = (h-oh) * (r * 1.5)
+
+   fp = pay + ext
+
+else:
+    fp = oh * r
+   
+print(fp)
+------------------
+#assignmesnts in descending order from last assignment to first
+
+---------------
+# This first line is provided for you
+
+hrs = input("Enter Hours:")
+rate = input("Enter Rate:")
+result = int(hrs) * float(rate)
+
+print('Pay: ' + str(float(result)))
+
+------------------------------
+
+# The code below almost works
+
+name = input("Enter your name")
+print('Hello' + ' ' + name)
+
+---------------------------
+ex 05_0
+
+num = 0
+tot = 0.0
+while True :
+    sval = input('Enter a number: ')
+    if sval == 'done' :
+        break
+    try:
+        fval = float(sval)
+    except:
+        print('Invalid input')
+        continue
+    # print('fval')
+    num = num + 1
+    tot = tot + fval
+    
+ # print ('ALL DONE')   
+print(tot,num,tot/num)
+ assignment 5.2
+ 
+ numbers_list = []
+
+while True:
+    try:
+          num = input("Enter a number: ")
+          nums = int(num)
+          numbers_list.append(nums)
+    except:
+          if num == "done":
+              break
+          else:
+              print("Invalid input")  
+largest = (max(numbers_list))
+smallest = (min(numbers_list))
+print("Maximum is", largest)
+print("Minimum is", smallest)
+ 
